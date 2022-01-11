@@ -6,10 +6,12 @@ Python script to sync media (gifs, videos and photos) in a Telegram chat with a 
 
 1. Register new api id and hash at [https://my.telegram.org](https://my.telegram.org)
 
-2. Run the following command to build the docker container
+2. Make a virtualenv and install all the needed package
 
 ```
-docker build -t telegram-image-downloader .
+pip3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
 ```
 
 3. Set Credentials in file `./credentials.env` (file is ignored via .gitignore)
@@ -31,7 +33,10 @@ source credentials.env
 5. Start downloading:
 
 ```
-docker run -v $(pwd)/contents:/contents -it telegram-image-downloader /bin/bash -c "python /contents/download.py $TELEGRAM_API_ID $TELEGRAM_API_HASH $TELEGRAM_PHONE_NUMBER $TELEGRAM_DOWNLOAD_FOLDER \"$TELEGRAM_CHATS\""
+python download.py $TELEGRAM_API_ID $TELEGRAM_API_HASH $TELEGRAM_PHONE_NUMBER $TELEGRAM_DOWNLOAD_FOLDER "$TELEGRAM_CHATS"
 ```
+
+And if you dont want to launch the virtual each time just replace `python` in the previous command by the path where the virtualenv python binary is.
+So from the root of the folder's project use `.venv/bin/python`.
 
 You will be prompted to enter the PIN you received in telegram (another device/app) and password (if enabled). After that the download starts.
