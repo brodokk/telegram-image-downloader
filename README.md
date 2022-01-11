@@ -1,6 +1,6 @@
-# Telegram Image Downloader
+# Telegram Media Downloader
 
-Python script to sync images in a Telegram chat with a local folder (one-way download).
+Python script to sync media (gifs, videos and photos) in a Telegram chat with a local folder (one-way download).
 
 ## How to
 
