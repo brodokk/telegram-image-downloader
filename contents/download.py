@@ -7,7 +7,6 @@ import sys
 
 from colored import attr, bg, fg
 from telethon import TelegramClient, sync
-from telethon.tl.types import InputMessagesFilterPhotos
 
 api_id = sys.argv[1]
 api_hash = sys.argv[2]
