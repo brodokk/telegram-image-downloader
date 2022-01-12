@@ -5,13 +5,12 @@ import json
 import logging
 import os
 import sys
+from argparse import ArgumentDefaultsHelpFormatter
 
 from colored import attr, bg, fg
 from telethon import TelegramClient, sync
 
-from utils import Config, contains_key, Status
-
-from argparse import ArgumentDefaultsHelpFormatter
+from utils import Config, Status, contains_key
 
 parser = argparse.ArgumentParser(
     formatter_class=argparse.ArgumentDefaultsHelpFormatter)
@@ -69,7 +68,7 @@ def dl_file(msg, path, retry=False):
 def dl():
 
     for chat in config.app.telegram_chats:
-        for msg in client.iter_messages(chat, 10):  # dont keep this
+        for msg in client.iter_messages(chat, None):
             if msg.gif:
                 gif_id = str(msg.gif.id)
                 path = config.app.telegram_download_folder + '/' + gif_id
