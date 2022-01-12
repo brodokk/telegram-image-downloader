@@ -14,26 +14,36 @@ source .venv/bin/activate
 python -m pip install -r requirements.txt
 ```
 
-3. Set Credentials in file `./credentials.env` (file is ignored via .gitignore)
+3. Set credentials in file `./config.toml` (file is ignored via .gitignore)
 
 ```
-TELEGRAM_API_ID=<API_ID>
-TELEGRAM_API_HASH=<API_HASH>
-TELEGRAM_PHONE=<PHONE_NUMBER>
-TELEGRAM_DOWNLOAD_FOLDER=<DOWNLOAD_FOLDER_PATH>
-TELEGRAM_CHATS=<CHAT_LIST> # comma separated list of chat names
+[APP]
+telegram_api_id = <api_id>
+telegram_api_hash = <api_hash>
+telegram_phone = <phone_number>
+telegram_download_folder = <download_folder_path>
+telegram_chats = [<chat_name>] # list of chat names
 ```
 
-4. Source the file
+4. Start downloading:
 
 ```
-source credentials.env
-```
+usage: download.py [-h] [--config CONFIG] [--telegram_api_id APP.TELEGRAM_API_ID] [--telegram_api_hash APP.TELEGRAM_API_HASH] [--telegram_phone_number APP.TELEGRAM_PHONE_NUMBER]
+                   [--telegram_download_folder APP.TELEGRAM_DOWNLOAD_FOLDER] [--telegram_chats APP.TELEGRAM_CHATS [APP.TELEGRAM_CHATS ...]]
 
-5. Start downloading:
-
-```
-python download.py $TELEGRAM_API_ID $TELEGRAM_API_HASH $TELEGRAM_PHONE_NUMBER $TELEGRAM_DOWNLOAD_FOLDER "$TELEGRAM_CHATS"
+optional arguments:
+  -h, --help            show this help message and exit
+  --config CONFIG       Path of the configuration file (default: config.toml)
+  --telegram_api_id APP.TELEGRAM_API_ID
+                        The Telegram api id of your application (default: )
+  --telegram_api_hash APP.TELEGRAM_API_HASH
+                        The Telegram api hash of your application (default: )
+  --telegram_phone_number APP.TELEGRAM_PHONE_NUMBER
+                        The Telegram phone number used for connect to your account. A password will be asked (default: )
+  --telegram_download_folder APP.TELEGRAM_DOWNLOAD_FOLDER
+                        The download folder where documents will be downloaded (default: )
+  --telegram_chats APP.TELEGRAM_CHATS [APP.TELEGRAM_CHATS ...]
+                        The list of chat names from where to download documents (default: )
 ```
 
 And if you dont want to launch the virtual each time just replace `python` in the previous command by the path where the virtualenv python binary is.

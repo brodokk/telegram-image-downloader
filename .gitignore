@@ -1,3 +1,4 @@
-credentials.env
+config.toml
 session_name.session
 .venv
+__pycache__/

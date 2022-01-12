@@ -1,0 +1,6 @@
+[app]
+telegram_api_id = ""
+telegram_api_hash = ""
+telegram_phone_number = ""
+telegram_download_folder = ""
+telegram_chats = []
