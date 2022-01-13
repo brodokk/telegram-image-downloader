@@ -75,8 +75,11 @@ def dl():
     chats.extend(config.app.telegram_chats)
     chats.extend(config.app.telegram_channels)
 
-    for chat in chats:
-        chat = get_id(client, chat)
+    for chat_name in chats:
+        chat = get_id(client, chat_name)
+        if not chat:
+            print("WARNING: chat `{}` not found".format(chat_name))
+            continue
         for msg in client.iter_messages(chat, None):
             if msg.gif:
                 gif_id = str(msg.gif.id)
