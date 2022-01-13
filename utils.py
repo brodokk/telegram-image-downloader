@@ -1,5 +1,8 @@
-import toml
 import sys
+
+import toml
+from telethon import utils
+
 
 def contains_key(_json, key):
     path = key
@@ -50,6 +53,10 @@ class Config(Dict2Obj):
     def __init__(self, args):
         toml_config = toml.load(args['config']) if args['config'] else {}
         keys_not_found = []
+        not_required = [
+            "app.telegram_chats",
+            "app.telegram_channels",
+        ]
 
         for key, value in args.items():
             path = key.split('.')
@@ -57,7 +64,7 @@ class Config(Dict2Obj):
                 key_path = path[1]
                 if not value:
                     value = contains_key(toml_config, key)
-                    if not value:
+                    if not value and key not in not_required:
                         keys_not_found.append(key)
                     continue
                 toml_config['app'][key_path] = value
@@ -82,3 +89,10 @@ class Status:
         return 'GIF: {}; VIDEO; {}; PHOTO: {}\nDL: {}; REDL: {}; ERROR: {}; TOTAL: {}'.format(
             self.gif, self.video, self.photo, self.dls, self.redl, self.error, self.total)
 
+
+def get_id(client, name):
+    for dialog in client.iter_dialogs():
+        if not dialog.is_group and dialog.is_channel:
+            if dialog.name == name:
+                real_id, peer_type = utils.resolve_id(dialog.id)
+                return peer_type(real_id)

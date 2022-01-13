@@ -10,7 +10,7 @@ from argparse import ArgumentDefaultsHelpFormatter
 from colored import attr, bg, fg
 from telethon import TelegramClient, sync
 
-from utils import Config, Status, contains_key
+from utils import Config, Status, contains_key, get_id
 
 parser = argparse.ArgumentParser(
     formatter_class=argparse.ArgumentDefaultsHelpFormatter)
@@ -37,6 +37,10 @@ parser.add_argument(
 parser.add_argument(
     "--telegram_chats", nargs="+", dest="app.telegram_chats", default="",
     help="The list of chat names from where to download documents"
+)
+parser.add_argument(
+    "--telegram_channels", nargs="+", dest="app.telegram_channels", default="",
+    help="The list of channel names from where to download documents"
 )
 
 args = parser.parse_args()
@@ -67,7 +71,12 @@ def dl_file(msg, path, retry=False):
 
 def dl():
 
-    for chat in config.app.telegram_chats:
+    chats = []
+    chats.extend(config.app.telegram_chats)
+    chats.extend(config.app.telegram_channels)
+
+    for chat in chats:
+        chat = get_id(client, chat)
         for msg in client.iter_messages(chat, None):
             if msg.gif:
                 gif_id = str(msg.gif.id)

@@ -23,13 +23,14 @@ telegram_api_hash = <api_hash>
 telegram_phone = <phone_number>
 telegram_download_folder = <download_folder_path>
 telegram_chats = [<chat_name>] # list of chat names
+telegram_channels = [<chat_name>] # list of channel names
 ```
 
 4. Start downloading:
 
 ```
 usage: download.py [-h] [--config CONFIG] [--telegram_api_id APP.TELEGRAM_API_ID] [--telegram_api_hash APP.TELEGRAM_API_HASH] [--telegram_phone_number APP.TELEGRAM_PHONE_NUMBER]
-                   [--telegram_download_folder APP.TELEGRAM_DOWNLOAD_FOLDER] [--telegram_chats APP.TELEGRAM_CHATS [APP.TELEGRAM_CHATS ...]]
+                   [--telegram_download_folder APP.TELEGRAM_DOWNLOAD_FOLDER] [--telegram_chats APP.TELEGRAM_CHATS [APP.TELEGRAM_CHATS ...]] [--telegram_channels APP.TELEGRAM_CHANNELS [APP.TELEGRAM_CHANNELS ...]]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -44,6 +45,8 @@ optional arguments:
                         The download folder where documents will be downloaded (default: )
   --telegram_chats APP.TELEGRAM_CHATS [APP.TELEGRAM_CHATS ...]
                         The list of chat names from where to download documents (default: )
+  --telegram_channels APP.TELEGRAM_CHANNELS [APP.TELEGRAM_CHANNELS ...]
+                        The list of channel names from where to download documents (default: )
 ```
 
 And if you dont want to launch the virtual each time just replace `python` in the previous command by the path where the virtualenv python binary is.
